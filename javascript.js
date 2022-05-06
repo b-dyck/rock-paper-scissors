@@ -1,30 +1,80 @@
-/* Whiteboarding
 
-computerPlay ()
-    Choose rock paper or scissors
-    return rock paper or scissors
+function computerPlay() {
+    let choice = Math.floor(Math.random()*3)
+    if (choice == 0) {
+        return "rock"
+    }
+    else if (choice == 1) {
+        return "paper"
+    }
+    else {
+        return "scissors"
+    }
+}
+console.log(computerPlay())
 
+function playerSelection() {
+    let choice = prompt("Choose Rock Paper or Scissors!")
+    if (choice == "rock" || choice == "paper" || choice == "scissors") {
+        return choice
+    }
+    else {
+        throw "not an option"
+    }
+}
 
-playerSelection ()
-    returm lowercase(prompt(choose option))
+function singleRound() {
+    let pChoice = playerSelection()
+    let cChoice = computerPlay()
+    if (pChoice == cChoice) {
+        return "tie"
+    }
+    else if (pChoice == "rock") {
+        if (cChoice == "paper") {
+            return "loss"
+        }   
+        else {
+            return "win"
+        }
+    }   
+    else if (pChoice == "paper") {
+        if (cChoice =="rock") {
+            return "win"
+        }  
+        else {
+            return "loss"
+        }
+    }
+    else {
+        if (cChoice == "rock") {
+            return "loss"
+        }
+        else {
+            return "win"
+        }
+    }
+}
 
-
-singleRound (playerSelection, computerPlay())
-    if same tie
-    if different choose winner
-    return result
-
-
-game()
+function game() {
     let playerWins = 0
     let computerWins = 0
-    for (1 to 5)
-        if singleRound() == player
+    for (let i = 0; i<5; i++) {
+        let result = singleRound()
+        if (result == "win") {
             playerWins++
-        else 
+        }
+        else if (result== "loss") {
             computerWins++
-    print playerWins + computerWins
+        }
+        else {
+            console.log('Tie - Score: Player - ' + playerWins + ' Computer - ' +computerWins)
+            continue
+        }
 
-*/
+        console.log('Score: Player - ' + playerWins + ' Computer - ' +computerWins)
 
 
+    }
+}
+
+game()
