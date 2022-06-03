@@ -8,6 +8,9 @@ buttons.forEach((button) => {
     });
   });
 
+const results = document.querySelector('#results')
+
+const scoreBoard = document.querySelector('#scoreboard')
   function computerPlay() {
     let choice = Math.floor(Math.random()*3)
     if (choice == 0) {
@@ -30,43 +33,68 @@ function playerSelection() {
         throw "not an option"
     }
 }
+let playerScore = 0
+let computerScore = 0
 
+function updateScore () {
+    scoreBoard.textContent = "YOU: " + playerScore + " - CPU: " + computerScore
+}
 function singleRound(id) {
+
     let pChoice = id
     let cChoice = computerPlay()
     if (pChoice == cChoice) {
-        console.log("tie")
-        return "tie"
+        results.textContent = 'TIE'
     }
     else if (pChoice == "rock") {
         if (cChoice == "paper") {
-            console.log("loss")
-            return "loss"
+            results.textContent = "LOSS"
+            computerScore += 1
+            updateScore()
         }   
         else {
-            console.log("win")
-            return "win"
+            results.textContent = "WIN"
+            playerScore += 1
+            updateScore()
         }
     }   
     else if (pChoice == "paper") {
         if (cChoice =="rock") {
-            console.log("win")
-            return "win"
+            results.textContent = "WIN"
+            playerScore += 1
+            updateScore()
         }  
         else {
-            console.log("loss")
-            return "loss"
+            results.textContent = "LOSS"
+            computerScore += 1
+            updateScore()
         }
     }
     else {
         if (cChoice == "rock") {
-            console.log("loss")
-            return "loss"
+            results.textContent = "LOSS"
+            computerScore += 1
+            updateScore()
         }
         else {
-            console.log("win")
-            return "win"
+            results.textContent = "WIN"
+            playerScore += 1
+            updateScore()
         }
+    }
+    if (playerScore == 5) {
+        playerScore = 0
+        computerScore = 0
+        scoreBoard.textContent = "WINNER"
+        results.textContent = ''
+        return
+    }
+    else if (computerScore == 5) {
+        playerScore = 0
+        computerScore = 0
+        scoreBoard.textContent = "LOSER"
+        results.textContent = ''
+        return
     }
 }
 
