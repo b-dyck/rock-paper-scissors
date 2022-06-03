@@ -1,5 +1,14 @@
+const buttons = document.querySelectorAll('button')
 
-function computerPlay() {
+buttons.forEach((button) => {
+
+    button.addEventListener('click', (e) => {
+        singleRound(e.target.id)
+
+    });
+  });
+
+  function computerPlay() {
     let choice = Math.floor(Math.random()*3)
     if (choice == 0) {
         return "rock"
@@ -11,7 +20,6 @@ function computerPlay() {
         return "scissors"
     }
 }
-console.log(computerPlay())
 
 function playerSelection() {
     let choice = prompt("Choose Rock Paper or Scissors!")
@@ -23,58 +31,42 @@ function playerSelection() {
     }
 }
 
-function singleRound() {
-    let pChoice = playerSelection()
+function singleRound(id) {
+    let pChoice = id
     let cChoice = computerPlay()
     if (pChoice == cChoice) {
+        console.log("tie")
         return "tie"
     }
     else if (pChoice == "rock") {
         if (cChoice == "paper") {
+            console.log("loss")
             return "loss"
         }   
         else {
+            console.log("win")
             return "win"
         }
     }   
     else if (pChoice == "paper") {
         if (cChoice =="rock") {
+            console.log("win")
             return "win"
         }  
         else {
+            console.log("loss")
             return "loss"
         }
     }
     else {
         if (cChoice == "rock") {
+            console.log("loss")
             return "loss"
         }
         else {
+            console.log("win")
             return "win"
         }
     }
 }
 
-function game() {
-    let playerWins = 0
-    let computerWins = 0
-    for (let i = 0; i<5; i++) {
-        let result = singleRound()
-        if (result == "win") {
-            playerWins++
-        }
-        else if (result== "loss") {
-            computerWins++
-        }
-        else {
-            console.log('Tie - Score: Player - ' + playerWins + ' Computer - ' +computerWins)
-            continue
-        }
-
-        console.log('Score: Player - ' + playerWins + ' Computer - ' +computerWins)
-
-
-    }
-}
-
-game()
